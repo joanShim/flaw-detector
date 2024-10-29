@@ -28,15 +28,15 @@ function NavMenu({ isDocsPage }: { isDocsPage: boolean }) {
     <nav className="w-full">
       <ul
         className={cn(
-          "flex-end-center w-full space-x-20 text-xl font-medium",
+          "flex-end-center h-[8.5rem] w-full space-x-20 text-xl font-medium",
           isDocsPage ? "text-white" : "text-gray-dark",
         )}
       >
         <li>
-          <Link href={"/vuldb/items"}>취약점 DB</Link>
+          <Link prefetch href={"/vuldb/items"}>취약점 DB</Link>
         </li>
         <li>
-          <Link href={"/repos"}>MY 저장소</Link>
+          <Link prefetch href={"/repos"}>MY 저장소</Link>
         </li>
       </ul>
     </nav>
