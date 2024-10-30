@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [_, startTransition] = useTransition();
   return (
     <>
-      <section className="flex-between-center min-h-dvh w-full max-w-[88.938rem]">
+      <section className="flex min-h-dvh w-full max-w-[88.938rem] flex-col items-center justify-evenly md:flex-row md:justify-between">
         <div className="absolute inset-0 -z-10">
           <EllipsesAnimation />
         </div>
