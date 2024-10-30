@@ -121,7 +121,7 @@ export default function CodeViewer({
         PreTag={({ children, ...props }) => (
           <pre
             {...props}
-            className="!m-0 h-full w-full max-w-full !overflow-x-auto"
+            className="!m-0 size-full max-w-full !overflow-x-auto"
             ref={codeRef}
           >
             {children}

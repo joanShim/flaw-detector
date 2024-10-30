@@ -1,5 +1,8 @@
+"use client";
+
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import { FileResultProps } from "@/types/file";
+import { memo } from "react";
 import {
   InfoBox,
   InfoBoxDescriptionList,
@@ -11,7 +14,7 @@ import {
 import { Label } from "../ui/Label";
 import CodeBlock from "./CodeBlock";
 
-export default function CodeResultsListItem({
+function CodeResultsListItem({
   name,
   vulnerability,
   descriptions,
@@ -68,7 +71,7 @@ export default function CodeResultsListItem({
         </InfoBoxDescriptionText>
       </div>
       {modified_codes && (
-        <div className="mt-8">
+        <div className="mt-8 w-full">
           <InfoBoxTitle color="gray">수정된 코드</InfoBoxTitle>
           <CodeBlock>{modifiedCodeStr}</CodeBlock>
         </div>
@@ -76,3 +79,5 @@ export default function CodeResultsListItem({
     </InfoBox>
   );
 }
+
+export default memo(CodeResultsListItem);
