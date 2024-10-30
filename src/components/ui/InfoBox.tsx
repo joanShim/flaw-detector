@@ -34,7 +34,7 @@ const infoBoxTitleVariants = cva("text-2xl font-semibold leading-[1.4]", {
 });
 
 const infoBoxDescriptionVariants = cva(
-  "text-lg font-medium leading=[1.575rem] tracking-[1.5%]",
+  "text-lg font-medium leading-[1.575rem] tracking-[1.5%]",
   {
     variants: {
       color: colorVariants,
@@ -85,7 +85,7 @@ function InfoBoxTitle({
     <p
       className={cn(infoBoxTitleVariants({ color }), className)}
       {...props}
-      role="title"
+      aria-label="title"
     >
       {children}
     </p>
@@ -121,7 +121,7 @@ function InfoBoxDescriptionListItem({
     <li
       className={cn("ml-4", className)}
       {...props}
-      role="vulnerability issue description"
+      aria-label="vulnerability issue description"
     >
       {children}
     </li>
@@ -142,7 +142,7 @@ function InfoBoxDescriptionText({
         className,
       )}
       {...props}
-      role="description"
+      aria-label="description"
     >
       {children}
     </p>
