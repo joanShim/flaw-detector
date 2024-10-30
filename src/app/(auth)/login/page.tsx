@@ -3,7 +3,6 @@
 import EllipsesAnimation from "@/app/(home)/_components/EllipsesAnimation";
 import Button from "@/components/ui/Button";
 import { loginWithGithub } from "@/lib/actions";
-import Image from "next/image";
 import Link from "next/link";
 import { useTransition } from "react";
 
