@@ -1,5 +1,6 @@
 "use client";
 
+import EllipsesAnimation from "@/app/(home)/_components/EllipsesAnimation";
 import Button from "@/components/ui/Button";
 import { loginWithGithub } from "@/lib/actions";
 import Image from "next/image";
@@ -11,14 +12,10 @@ export default function LoginPage() {
   return (
     <>
       <section className="flex-between-center min-h-dvh w-full max-w-[88.938rem]">
-        <Image
-          src="/images/landingBg.png"
-          alt="my repos bg"
-          width={1920}
-          height={1272}
-          priority
-          className="absolute left-0 top-0 -z-10"
-        />
+        <div className="absolute inset-0 -z-10">
+          <EllipsesAnimation />
+        </div>
+
         <article className="flex-col-center-center text-[3.75rem] leading-[4.538rem] tracking-[0.05em] text-primary-500">
           <span className="mb-5">Find your Flaw,</span>
           <Button
