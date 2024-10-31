@@ -124,7 +124,7 @@ export default function ContactForm() {
     >
       <div>
         <h3 className="mb-4 text-2xl font-bold leading-9">문의하기</h3>
-        <p className="text-base font-medium tracking-[-0.011em] text-[#8F8F8F]">
+        <p className="text-base font-medium tracking-[-0.011em] text-gray-default">
           문의하고싶은 내용을 구체적으로 작성해주셔야 피드백이 정상적으로
           반영됩니다.
         </p>
