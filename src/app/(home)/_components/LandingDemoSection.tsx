@@ -8,10 +8,9 @@ import { Status, StatusMessage } from "@/components/analyze/Status";
 import Button from "@/components/ui/Button";
 import { IconList, IconMultiSelect } from "@/components/ui/Icons";
 import TitleBar from "@/components/ui/TitleBar";
-import { useFadeUpAnimation } from "@/hooks/useFadeUpAnimation";
 import { exampleCode } from "@/lib/dummy";
 import { FileResultProps } from "@/types/file";
-import { memo } from "react";
+import { memo, useEffect, useRef } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -72,7 +71,42 @@ const demoCodeResults: Array<FileResultProps> = [
 const MemoizedSyntaxHighlighter = memo(SyntaxHighlighter);
 
 export default function LandingDemoSection() {
-  const sectionRef = useFadeUpAnimation(0.5);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    let timeouts: number[] = [];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            const timeoutId = window.setTimeout(() => {
+              target.classList.add("animate-fade-up");
+            }, index * 300);
+            timeouts.push(timeoutId);
+          } else {
+            target.classList.remove("animate-fade-up");
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    const section = sectionRef.current;
+    if (section) {
+      const elements = section.querySelectorAll(".fade-up-element");
+      elements.forEach((el) => observer.observe(el));
+    }
+
+    return () => {
+      if (section) {
+        const elements = section.querySelectorAll(".fade-up-element");
+        elements.forEach((el) => observer.unobserve(el));
+      }
+      timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+    };
+  }, []);
 
   return (
     <section
