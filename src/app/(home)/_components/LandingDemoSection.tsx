@@ -1,55 +1,175 @@
-import { exampleCode } from "@/lib/dummy";
-import ProcessStatus from "@/components/analyze/ProcessStatus";
+"use client";
+
+import CodeResultsListItem from "@/components/analyze/CodeResultsListItem";
+import FileTreeItemDemo, {
+  FileTreeItemDemoProps,
+} from "@/components/analyze/FileTree/FileTreeItemDemo";
+import { Status, StatusMessage } from "@/components/analyze/Status";
 import Button from "@/components/ui/Button";
+import { IconList, IconMultiSelect } from "@/components/ui/Icons";
+import TitleBar from "@/components/ui/TitleBar";
+import { useFadeUpAnimation } from "@/hooks/useFadeUpAnimation";
+import { exampleCode } from "@/lib/dummy";
+import { FileResultProps } from "@/types/file";
+import { memo } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+const demoFileTreeItems: Array<FileTreeItemDemoProps> = [
+  { type: "dir", name: "public" },
+  { type: "dir", name: "src", isOpenDir: true },
+  { type: "dir", name: "app", isOpenDir: true, level: 1 },
+  { type: "dir", name: "(blog)", isOpenDir: true, level: 2 },
+  {
+    type: "file",
+    name: "layout.tsx",
+    level: 3,
+    isChecked: true,
+  },
+  { type: "file", name: "page.tsx", level: 3, isBookmarked: true },
+  { type: "dir", name: "api", level: 2 },
+  { type: "file", name: "globals.css", level: 3, isHovered: true },
+  { type: "file", name: "layout.tsx", level: 3, isSuccessful: true },
+  { type: "file", name: "loading.tsx", level: 3 },
+  { type: "dir", name: "loading.tsx", level: 3 },
+];
+
+const demoCodeResults: Array<FileResultProps> = [
+  {
+    id: "1",
+    name: "XSS (Cross-Site Scripting) Vulnerability",
+    vulnerability:
+      "사용자 입력을 HTML에 직접 삽입하면서 HTML을 안전하게 처리하지 않음.",
+    severity: "High",
+    descriptions: [
+      "사용자 입력을 HTML에 삽입하기 전에 반드시 적절한 인코딩을 수행하거나, DOM API를 사용해 안전하게 요소를 삽입해야함.",
+      "‘innerHTML’은 입력된 HTML 코드를 그대로 렌더링하기 때문에 악성 스크립트를 실행할 수 있음. ‘textContent’는 HTML을 해석하지 않고 텍스트로만 처리하기 때문에 안전함.",
+    ],
+    lines: "12-13",
+    modified_codes: [
+      "function displayUserInput(input) {",
+      "  document.getElementById('userInput').textContent = input;",
+      "}",
+    ],
+  },
+  {
+    id: "2",
+    name: "Insecure Password Handling",
+    vulnerability: "비밀번호를 ‘localStorage’ 에 평문으로 저장함.",
+    severity: "High",
+    descriptions: [
+      "비밀번호는 브라우저의 메모리에서만 유지되도록 하고, 저장이 필요한 경우에는 안전한 해시 알고리즘을 사용해 해시값만 저장.",
+      "‘localStorage’는 자바스크립트를 통해 쉽게 접근할 수 있어, 악성 스크립트에 의해 유출될 수 있음. 비밀번호를 해시하여 저장하면 공격자가 해시값을 얻더라도 원래 비밀번호를 알아내기 어려움.",
+    ],
+    lines: "30-40",
+    modified_codes: [
+      "const query = `SELECT * FROM users WHERE id = ${sanitizedId}`;",
+      "db.query(query);",
+    ],
+  },
+];
+
+const MemoizedSyntaxHighlighter = memo(SyntaxHighlighter);
 
 export default function LandingDemoSection() {
+  const sectionRef = useFadeUpAnimation(0.5);
+
   return (
-    <section className="flex-end-center relative max-h-screen min-h-dvh w-full overflow-y-clip px-[9.063rem]">
-      <article className="absolute left-[12rem] top-[5.7rem] w-[45.313rem] overflow-x-visible rounded-lg border border-neutral-30 p-10">
+    <section
+      className="flex-center-center snap-box pointer-events-none relative max-h-screen min-h-[calc(100dvh-8.5rem)] w-full gap-x-[7.29rem] overflow-hidden overflow-y-clip"
+      ref={sectionRef}
+    >
+      <section className="mt-[12rem] hidden h-fit w-full max-w-[82.077rem] overflow-hidden overflow-x-visible rounded-[2.634rem] border-[0.102rem] border-line-light p-[3.42rem] lg:block">
         <div className="flex h-[61rem] flex-col">
-          <ProcessStatus status="inProgress" />
-          <div>
-            <code className="block size-full whitespace-pre-wrap text-sm font-medium leading-tight -tracking-[0.011em] blur-[6px]">
-              {exampleCode}
-            </code>
-            <Button
-              variant="filled"
-              shape="rounded"
-              className="absolute top-[15.7%] z-40 translate-x-[42%] whitespace-nowrap bg-primary-300 px-[0.625rem] py-2 font-normal shadow-[0_1.5rem_2.25rem_0_rgba(0,0,0,0.25)]"
-            >
-              SectionBusinessForever from
-              "@/components/section-business-forever";
-            </Button>
-            <Button
-              variant="filled"
-              shape="rounded"
-              className="absolute top-[29%] z-40 translate-x-[56.5%] bg-primary-300 px-[0.625rem] py-2 font-normal shadow-[0_1.5rem_2.25rem_0_rgba(0,0,0,0.25)]"
-            >
-              "flex flex-col items-center py-36 min-h-screen"
-            </Button>
-            <Button
-              variant="filled"
-              shape="rounded"
-              className="absolute bottom-[27.4%] z-40 translate-x-[27%] bg-primary-300 px-[0.625rem] py-2 font-normal shadow-[0_1.5rem_2.25rem_0_rgba(0,0,0,0.25)]"
-            >
-              Card className
-            </Button>
+          <TitleBar title="Project-1" as="span" />
+          <div className="flex h-full min-h-dvh gap-7">
+            <article className="flex w-full max-w-[16rem] flex-col gap-7">
+              <Button
+                className="h-[6.75rem] w-full cursor-default text-2xl font-semibold"
+                aria-label="detect selected files"
+              >
+                선택한 파일 검사 (1)
+              </Button>
+              <Status>
+                <StatusMessage type="error">12</StatusMessage>
+                <StatusMessage type="warning">8</StatusMessage>
+                <StatusMessage type="success">23</StatusMessage>
+              </Status>
+
+              {/* FileList */}
+              <div className="w-full overflow-hidden rounded-lg border border-line-light">
+                <div className="flex items-center rounded-t-[0.513rem] border-b border-line-light bg-purple-light px-[0.855rem] py-5 text-xl text-black">
+                  <div className="flex w-full items-center justify-between">
+                    <span>Files</span>
+                    <div className="flex gap-3.5">
+                      <IconMultiSelect width={20} />
+                      <IconList width={20} />
+                    </div>
+                  </div>
+                </div>
+                <ul className="max-h-[40rem] overflow-x-hidden overflow-y-scroll text-gray-dark scrollbar-hide">
+                  {demoFileTreeItems.map((item, index) => (
+                    <FileTreeItemDemo key={index} {...item}>
+                      {item.name}
+                    </FileTreeItemDemo>
+                  ))}
+                </ul>
+              </div>
+            </article>
+
+            {/* CodeContainer */}
+            <article className="relative w-full overflow-hidden">
+              <div className="relative h-full max-h-[23.725rem] w-full overflow-hidden rounded-[0.684rem] border-[0.042rem] border-line-light">
+                <MemoizedSyntaxHighlighter
+                  language="javascript"
+                  style={oneLight}
+                  showLineNumbers
+                  wrapLines
+                  className="!mt-0 !pl-0 blur-sm"
+                >
+                  {exampleCode}
+                </MemoizedSyntaxHighlighter>
+                <Button
+                  variant="demo"
+                  shape="rounded"
+                  className="top-[35%] translate-x-[25%]"
+                  aria-label="detected vulnerability"
+                >
+                  🚨 {demoCodeResults[0]["name"]}
+                </Button>
+                <Button
+                  variant="demo"
+                  shape="rounded"
+                  className="top-[70%] translate-x-[140%]"
+                  aria-label="detected vulnerability"
+                >
+                  🚨 {demoCodeResults[1]["name"]}
+                </Button>
+              </div>
+              <div className="mt-[1.71rem] flex flex-col gap-y-6">
+                {demoCodeResults.map((item, index) => (
+                  <CodeResultsListItem key={index} {...item} />
+                ))}
+              </div>
+            </article>
           </div>
         </div>
-      </article>
-      <article className="mt-[7%] flex w-fit flex-col gap-y-[2.125rem]">
-        <h3 className="flex-col-end-center w-full space-y-3 truncate text-[3.75rem] font-bold leading-[4.538rem] -tracking-[0.011em] text-primary-500">
-          <span>최신 보안 동향을</span>
-          <span>실시간으로 확인하세요.</span>
+      </section>
+      <section className="flex-col-center w-fit! gap-y-[2.125rem] leading-tight">
+        <h3 className="flex-col-end-center w-full space-y-3 truncate text-clamp-3xl font-bold -tracking-[0.011em] text-primary-500">
+          <span className="fade-up-element opacity-0">최신 보안 동향을</span>
+          <span className="fade-up-element opacity-0">
+            실시간으로 확인하세요.
+          </span>
         </h3>
-        <p className="flex-col-end-center w-full space-y-2 text-xl font-medium leading-[1.513rem] -tracking-[0.011em] text-gray-default">
+        <p className="flex-col-end-center w-full space-y-2 text-[1.4rem] font-medium -tracking-[0.011em] text-gray-default sm:text-2xl">
           <span>실시간으로 최신 보안 동향을 제공하여</span>
           <span>개발자들이 보안 취약점에 대한 최신 정보를 받을 수 있어</span>
           <span>
             보안 강화를 위한 코딩 관행을 지속적으로 개선할 수 있습니다.
           </span>
         </p>
-      </article>
+      </section>
     </section>
   );
 }
