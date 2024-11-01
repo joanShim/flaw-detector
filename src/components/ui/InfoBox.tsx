@@ -137,7 +137,7 @@ function InfoBoxDescriptionText({
   return (
     <p
       className={cn(
-        "flex flex-col",
+        "hidden xl:flex xl:flex-col",
         infoBoxDescriptionVariants({ color }),
         className,
       )}
