@@ -4,7 +4,7 @@ import ContactForm from "../me/ContactForm";
 export default function CustomerService({ className }: { className?: string }) {
   return (
     <section className={cn("flex w-full justify-center px-[1rem]", className)}>
-      <div className="flex-center-center h-[50.813rem] w-full max-w-[96.125rem] px-12 lg:gap-x-28 lg:px-0 xl:gap-x-[10.333rem]">
+      <div className="flex-center-center h-[50.813rem] w-full max-w-[96.125rem] px-12 pt-2 sm:pt-0 lg:gap-x-28 lg:px-0 xl:gap-x-[10.333rem]">
         <div className="hidden size-full max-w-[28.125rem] lg:block">
           <h2 className="word-break-phrase text-6xl font-bold leading-[5.625rem] tracking-tighter text-primary-500">
             서비스 이용에

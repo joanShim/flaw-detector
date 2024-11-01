@@ -166,7 +166,7 @@ export default function ContactForm() {
     <form
       onSubmit={onSubmitForm}
       className={cn(
-        "flex h-full w-full max-w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12",
+        "flex size-full max-w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12",
       )}
     >
       <div>
