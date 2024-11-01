@@ -18,6 +18,9 @@ const SERVER_ERROR_MESSAGE =
 
 const ContactSuccessModal = dynamic(
   () => import("@/components/me/ContactModal"),
+  {
+    ssr: false,
+  },
 );
 
 function ValidationError({
@@ -202,10 +205,12 @@ export default function ContactForm() {
       </div>
 
       {/* Modal for SUCCESS */}
-      <ContactSuccessModal
-        requestState={requestState}
-        setRequestState={setRequestState}
-      />
+      {requestState === "success" && (
+        <ContactSuccessModal
+          requestState={requestState}
+          setRequestState={setRequestState}
+        />
+      )}
     </form>
   );
 }
