@@ -3,7 +3,10 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
-import { IconArrow, IconChat } from "./Icons";
+import dynamic from "next/dynamic";
+
+const IconChat = dynamic(() => import("@/components/ui/icons/IconChat"));
+const IconArrow = dynamic(() => import("@/components/ui/icons/IconArrow"));
 
 const floatingVariants = cva(
   "w-[4.75rem] h-[4.75rem] border-[0.091rem] border-primary-500 rounded-full text-primary-500 flex-center-center flex-col z-20",

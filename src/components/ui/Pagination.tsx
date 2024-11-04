@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import { IconCaretLeft } from "./Icons";
+import IconCaretLeft from "./icons/IconCaretLeft";
 
 export type PaginationProps = {
   className?: string;

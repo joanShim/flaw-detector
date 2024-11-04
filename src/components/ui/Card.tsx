@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { IconArrow } from "./Icons";
+import IconArrow from "./icons/IconArrow";
 import { forwardRef } from "react";
 
 const cardVariants = cva("relative flex flex-col w-full", {

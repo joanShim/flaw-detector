@@ -1,5 +1,6 @@
 "use client";
-import { IconBug } from "@/components/ui/Icons";
+
+import IconBug from "@/components/ui/icons/IconBug";
 import { motion, SVGMotionProps } from "framer-motion";
 
 export default function LandingFeatureSection() {

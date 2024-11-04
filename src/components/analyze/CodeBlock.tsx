@@ -1,9 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { IconCheck, IconCopy } from "../ui/Icons";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import { cn, getLanguage } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+const IconCheck = dynamic(() => import("@/components/ui/icons/IconCheck"));
+const IconCopy = dynamic(() => import("@/components/ui/icons/IconCopy"));
 
 export default function CodeBlock({
   className,

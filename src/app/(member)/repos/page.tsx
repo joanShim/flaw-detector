@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Profile from "@/components/me/Profile";
 import { RepoHeader } from "@/components/me/RepoHeader";
 import { RepoListSkeleton } from "@/components/me/RepoListSkeleton";
-import { IconCaretLeft } from "@/components/ui/Icons";
+import IconCaretLeft from "@/components/ui/icons/IconCaretLeft";
 import { getRepoListFromDB, getRepoLists } from "@/lib/api/repositories";
 import { RepoListData } from "@/types/repo";
 import dynamic from "next/dynamic";

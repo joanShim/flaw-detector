@@ -1,6 +1,7 @@
-import { IconDone, IconOnProcess } from "../ui/Icons";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import IconOnProcess from "../ui/icons/IconOnProcess";
+import IconDone from "../ui/icons/IconDone";
 
 type StatusVariantsProps = VariantProps<typeof statusVariants>;
 

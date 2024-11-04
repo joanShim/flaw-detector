@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { IconMagnifierWithPlus } from "../ui/Icons";
+import IconMagnifierWithPlus from "../ui/icons/IconMagnifierWithPlus";
 
 const SyntaxHighlighter = dynamic(
   () => import("react-syntax-highlighter").then((mod) => mod.Prism),
