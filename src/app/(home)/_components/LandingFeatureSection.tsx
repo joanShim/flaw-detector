@@ -137,7 +137,7 @@ export default function LandingFeatureSection() {
             <span>코드보안</span>
             <span>어떻게 관리하시나요?</span>
           </p>
-          <p className="flex-col-start-center mb-2 mt-7 space-y-2 text-clamp-sm tracking-[-0.01em] text-[#9C6FA8]">
+          <p className="flex-col-start-center mb-2 mt-7 space-y-2 text-clamp-sm tracking-[-0.01em] text-gray-default">
             <span>플로디텍터는 안전한 소프트웨어 개발을 위한 필수 도구로,</span>
             <span>코드의 보안 취약점을 사전에 수정함으로써</span>
             <span>개발자들에게 편의와 안전한 개발 환경을 제공합니다.</span>

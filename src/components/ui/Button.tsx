@@ -34,7 +34,7 @@ export default function Button({
       "flex-center-center w-full gap-x-[0.625rem] border border-line-light p-4 text-xl font-medium leading-7 text-gray-dark",
     navigation:
       "flex-center-center absolute bottom-[47%] size-[3.25rem] rounded-[50%] border border-gray-dark bg-white",
-    demo: "absolute text-white whitespace-nowrap bg-primary-300 p-[1rem] text-xl font-normal shadow-[0_1.5rem_2.25rem_0_rgba(0,0,0,0.25)] z-10",
+    demo: "absolute text-white whitespace-nowrap bg-[#893FFF] p-[1rem] text-xl font-normal shadow-[0_1.5rem_2.25rem_0_rgba(0,0,0,0.25)] z-10",
   };
 
   const shapeStyles = {
