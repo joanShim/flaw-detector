@@ -1,7 +1,6 @@
 import { cn, formatFileSize } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import { useCallback } from "react";
-import { IconRoundedDoc } from "./Icons";
 
 const modalVariants = cva("relative flex flex-col bg-white ", {
   variants: {
@@ -54,7 +53,7 @@ type ListItemProps = {
 
 export function ListItem({ name, path, size }: ListItemProps) {
   return (
-    <li className="grid h-11 w-full grid-cols-[1fr_1.5fr_4rem] gap-1 items-center justify-between border border-b p-[0.625rem] last:border-0">
+    <li className="grid h-11 w-full grid-cols-[1fr_1.5fr_4rem] items-center justify-between gap-1 border border-b p-[0.625rem] last:border-0">
       <div className="truncate font-medium">{name}</div>
       <div className="truncate text-xs font-normal leading-[0.907rem] tracking-[-0.01em] text-[#9E9E9E]">
         {path}
