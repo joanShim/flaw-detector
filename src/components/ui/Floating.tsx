@@ -25,9 +25,11 @@ export type FloatingProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Floating = React.forwardRef<HTMLButtonElement, FloatingProps>(
   ({ className, variant, ...props }, ref) => {
+    const isTopFloating = variant === "top";
     return (
       <button
         type="button"
+        aria-label={isTopFloating ? "맨 위로 이동하기" : "채팅하기 (미지원)"}
         className={cn(
           floatingVariants({ variant }),
           className,
@@ -36,8 +38,8 @@ const Floating = React.forwardRef<HTMLButtonElement, FloatingProps>(
         ref={ref}
         {...props}
       >
-        {variant === "top" ? <IconArrow className="h-7 w-7" /> : <IconChat />}
-        {variant === "top" && <span>TOP</span>}
+        {isTopFloating ? <IconArrow className="h-7 w-7" /> : <IconChat />}
+        {isTopFloating && <span>TOP</span>}
       </button>
     );
   },
