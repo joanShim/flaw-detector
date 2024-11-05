@@ -16,7 +16,9 @@ function HeaderLogo({ isDocsPage }: { isDocsPage: boolean }) {
         color={isDocsPage ? "text-white" : "text-primary-500"}
         className={cn("mr-3 h-[35px] w-[34px]", isDocsPage && "text-white")}
       />
-      <span className={`${aldrich.className} text-[2.5rem] tracking-[-0.01em]`}>
+      <span
+        className={`${aldrich.className} hidden text-[2.5rem] tracking-[-0.01em] md:block`}
+      >
         FLAWDETECTOR
       </span>
     </Link>
@@ -28,15 +30,19 @@ function NavMenu({ isDocsPage }: { isDocsPage: boolean }) {
     <nav className="w-full">
       <ul
         className={cn(
-          "flex-end-center h-[8.5rem] w-full space-x-20 text-xl font-medium",
+          "flex-end-center h-[8.5rem] w-full space-x-8 md:space-x-20 text-xl font-medium",
           isDocsPage ? "text-white" : "text-gray-dark",
         )}
       >
         <li>
-          <Link prefetch href={"/vuldb/items"}>취약점 DB</Link>
+          <Link prefetch href={"/vuldb/items"}>
+            취약점 DB
+          </Link>
         </li>
         <li>
-          <Link prefetch href={"/repos"}>MY 저장소</Link>
+          <Link prefetch href={"/repos"}>
+            MY 저장소
+          </Link>
         </li>
       </ul>
     </nav>
@@ -56,7 +62,7 @@ export default function Header() {
           : "sticky bg-white",
       )}
     >
-      <div className="flex-center-center mx-auto h-full max-w-[120rem] px-20 py-12">
+      <div className="flex-center-center mx-auto h-full max-w-[120rem] px-12 py-12 md:px-20">
         <HeaderLogo isDocsPage={isDocsPage} />
         <NavMenu isDocsPage={isDocsPage} />
       </div>

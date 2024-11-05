@@ -1,10 +1,33 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isLandingPage = pathname === "/";
+
   return (
-    <footer className="h-[20.25rem] w-full bg-purple-light bg-[url('/images/footerBg.png')] bg-cover bg-right">
-      <div className="mx-auto flex max-w-[120rem] items-end justify-between px-20 pb-[3.313rem] pt-[3.75rem]">
+    <footer
+      className={cn(
+        "relative h-[20.25rem] w-full bg-purple-light",
+        isLandingPage ? "snap-start snap-always" : "",
+      )}
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/footerBg.png"
+          alt="Footer 배경 이미지"
+          fill={true}
+          className="object-cover"
+        />
+      </div>
+
+      {/* Footer Content */}
+      <div className="relative z-10 mx-auto flex max-w-[120rem] items-end justify-between px-20 pb-[3.313rem] pt-[3.75rem]">
         <div>
           <Image
             src="/images/footerLogo.png"

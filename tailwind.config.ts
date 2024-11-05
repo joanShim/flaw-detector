@@ -10,6 +10,12 @@ const config: Config = {
     extend: {
       fontSize: {
         root: "12px",
+        clamp: "clamp(1rem, 5vw, 3rem)",
+        "clamp-sm": "clamp(0.4rem, 5vw, 1.5rem)",
+        "clamp-md": "clamp(1.4rem, 5vw, 2.8rem)",
+        "clamp-2xl": "clamp(2rem, 5vw, 3.75rem)",
+        "clamp-3xl": "clamp(3.65rem, 5vw, 5rem)",
+        "clamp-4xl": "clamp(4rem, 5vw, 6.5rem)",
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
@@ -86,11 +92,22 @@ const config: Config = {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(-360deg)" },
         },
+        fadeUp: {
+          "0%": {
+            transform: "translate3d(0, 1.5rem, 0)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translate3d(0, 0, 0)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "scroll-left": "scrollLeft 10s linear infinite",
         "round-clockwise": "roundClockwise 1.7s infinite ease", // 시계 방향
         "round-counter-clockwise": "roundCounterClockwise 1.7s infinite ease", // 반시계 방향
+        "fade-up": "fadeUp 0.9s ease-in-out forwards",
       },
     },
   },
