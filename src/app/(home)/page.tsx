@@ -21,7 +21,7 @@ export default async function LandingPage() {
       <LandingFeatureSection />
       <LandingDemoSection />
       <LandingServiceSection />
-      <CustomerService className="my-[6.5rem] snap-center snap-always" />
+      <CustomerService className="my-[8.5rem] snap-center snap-always" />
       <LandingTopFloating />
     </>
   );
