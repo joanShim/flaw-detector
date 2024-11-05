@@ -136,7 +136,6 @@ export default function RunInspectButton({
   const renderFileList = () => {
     if (scanType === "selected") {
       const selectedFiles = getSelectedFiles();
-      console.log(selectedFiles);
       return (
         <List
           items={selectedFiles.map(({ path, name, size }) => ({
