@@ -3,7 +3,8 @@
 import { useRepoListStore } from "@/stores/useRepoListStore";
 import { useShallow } from "zustand/react/shallow";
 import Button from "../ui/Button";
-import { IconBookmarkFolder, IconClockCounterClockwise } from "../ui/Icons";
+import IconBookmarkFolder from "../ui/icons/IconBookmarkFolder";
+import IconClockCounterClockwise from "../ui/icons/IconClockCounterClockwise";
 
 const buttonType = {
   bookmark: {

@@ -10,7 +10,8 @@ import {
   CardSubTitle,
   CardTitle,
 } from "../ui/Card";
-import { IconBug, IconCaretLeft } from "../ui/Icons";
+import IconBug from "../ui/icons/IconBug";
+import IconCaretLeft from "../ui/icons/IconCaretLeft";
 import { Label, LabelProps } from "../ui/Label";
 import RepoBookmark from "./RepoBookmark";
 

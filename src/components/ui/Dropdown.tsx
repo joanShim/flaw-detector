@@ -2,7 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { forwardRef, useRef, useState } from "react";
-import { IconCaretDown, IconCheck } from "./Icons";
+import IconCheck from "./icons/IconCheck";
+import IconCaretDown from "./icons/IconCaretDown";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 export type DropdownProps = React.HTMLAttributes<HTMLDivElement> & {

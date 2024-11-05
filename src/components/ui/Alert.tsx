@@ -6,13 +6,11 @@ import { useDetectedModeStore } from "@/stores/useDetectedModeStore";
 import { useFileProcessStore } from "@/stores/useFileProcessStore";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import Button from "./Button";
-import {
-  IconArrowsCounterClockwise,
-  IconCheck,
-  IconClose,
-  IconHourGlass,
-  IconThinClose,
-} from "./Icons";
+import IconArrowsCounterClockwise from "./icons/IconArrowsCounterClockwise";
+import IconHourGlass from "./icons/IconHourGlass";
+import IconClose from "./icons/IconClose";
+import IconCheck from "./icons/IconCheck";
+import IconThinClose from "./icons/IconThinClose";
 
 const alertType = {
   onCheck: {
@@ -167,7 +165,7 @@ export const Alert = ({
         </div>
 
         <div className="shrink-0 basis-8">
-          <IconThinClose className="size-8 cursor-pointer" onClick={onClose} />
+          <IconThinClose onClick={onClose} />
         </div>
       </div>
     )

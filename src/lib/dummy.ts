@@ -1,6 +1,3 @@
-import { VulDBPost } from "@/types/post";
-import { Timestamp } from "firebase/firestore";
-
 export const exampleCode = `import SectionBusinessForever from "@/components/section-business-forever";
 import SectionVideoDisplayer from "@/components/section-video-displayer";
 import { Badge } from "@/components/ui/badge";
@@ -38,54 +35,6 @@ export default function Home() {
           </CardHeader>
         </Card>
         <Card className="bg-transparent backdrop-blur-sm">`;
-
-export const exampleCertCCVulDBPost: VulDBPost = {
-  id: "VulDB-09-01",
-  label: "기타",
-  source: "CERT/CC",
-  page_url: "https://www.kb.cert.org/vuls/id/244112",
-  title: {
-    original:
-      "Multiple SMTP services are susceptible to spoofing attacks due to insufficient enforcement",
-    translated:
-      "여러 SMTP 서비스가 불충분한 강화로 인해 스푸핑 공격에 취약합니다.",
-  },
-  created_at: Timestamp.fromDate(new Date("2023-09-01T12:34:56Z")),
-  source_updated_at: Timestamp.fromDate(new Date("2024-09-01T12:34:56Z")),
-  source_created_at: Timestamp.fromDate(new Date("2024-09-01T12:34:56Z")),
-  views: 0,
-  content: {
-    overview: {
-      original: [{ id: "1", text: "overview" }],
-      translated: [{ id: "1", text: "overview" }],
-    },
-    description: {
-      original: [
-        { id: "1", text: "description1" },
-        { id: "2", text: "description2" },
-      ],
-      translated: [
-        { id: "1", text: "description1" },
-        { id: "2", text: "description2" },
-      ],
-    },
-    impact: {
-      original: [{ id: "1", text: "impact" }],
-      translated: [{ id: "1", text: "impact" }],
-    },
-    solution: {
-      original: [
-        { id: "1", text: "solution1" },
-        { id: "2", text: "solution2" },
-      ],
-      translated: [
-        { id: "1", text: "solution1" },
-        { id: "2", text: "solution2" },
-      ],
-    },
-    cveIDs: ["CVE-2024-7208", "CVE-2024-7209"],
-  },
-};
 
 //selectedfile 모달에서 쓰이는 더미데이터
 export const dummyFileItems = [

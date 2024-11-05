@@ -1,6 +1,6 @@
 "use client";
 
-import { IconBug } from "@/components/ui/Icons";
+import IconBug from "@/components/ui/icons/IconBug";
 import { motion, SVGMotionProps, useAnimation } from "framer-motion";
 import { memo, useEffect, useRef } from "react";
 
@@ -129,15 +129,15 @@ export default function LandingFeatureSection() {
     >
       <div className="mx-auto flex w-full max-w-screen-xl items-center p-12 lg:justify-between xl:p-4">
         <article className="lg:max-w-dvw h-auto w-auto leading-tight lg:max-w-[55%]">
-          <h2 className="flex-col-start-center w-full space-y-3 whitespace-nowrap text-clamp-4xl font-bold tracking-[-0.01em]">
+          <h2 className="flex-col-start-center text-clamp-4xl w-full space-y-3 whitespace-nowrap font-bold tracking-[-0.01em]">
             <span className="fade-up-element opacity-0">쉽고 편하게</span>
             <span className="fade-up-element opacity-0">취약점을 발견하다</span>
           </h2>
-          <p className="mt-[3.75rem] flex flex-col space-y-3 text-clamp-md font-bold tracking-[-0.01em] text-gray-dark">
+          <p className="text-clamp-md mt-[3.75rem] flex flex-col space-y-3 font-bold tracking-[-0.01em] text-gray-dark">
             <span>코드보안</span>
             <span>어떻게 관리하시나요?</span>
           </p>
-          <p className="flex-col-start-center mb-2 mt-7 space-y-2 text-clamp-sm tracking-[-0.01em] text-gray-default">
+          <p className="flex-col-start-center text-clamp-sm mb-2 mt-7 space-y-2 tracking-[-0.01em] text-gray-default">
             <span>플로디텍터는 안전한 소프트웨어 개발을 위한 필수 도구로,</span>
             <span>코드의 보안 취약점을 사전에 수정함으로써</span>
             <span>개발자들에게 편의와 안전한 개발 환경을 제공합니다.</span>

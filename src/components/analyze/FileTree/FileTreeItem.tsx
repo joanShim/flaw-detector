@@ -1,13 +1,3 @@
-import {
-  IconCaretLeft,
-  IconDoc,
-  IconDone,
-  IconError,
-  IconFolder,
-  IconOnProcess,
-  IconOnWait,
-  IconStar,
-} from "@/components/ui/Icons";
 import { RepoTreeItem } from "@/lib/api/repositories";
 import { cn, getLanguage } from "@/lib/utils";
 import { useFileBookmarkStore } from "@/stores/useFileBookmarkStore";
@@ -16,6 +6,18 @@ import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import React, { useCallback, useMemo, useState } from "react";
 import Checkbox from "./Checkbox";
 import { useFileProcessStore } from "@/stores/useFileProcessStore";
+import dynamic from "next/dynamic";
+import IconFolder from "@/components/ui/icons/IconFolder";
+import IconDoc from "@/components/ui/icons/IconDoc";
+import IconCaretLeft from "@/components/ui/icons/IconCaretLeft";
+
+const IconStar = dynamic(() => import("@/components/ui/icons/IconStar"));
+const IconOnProcess = dynamic(
+  () => import("@/components/ui/icons/IconOnProcess"),
+);
+const IconOnWait = dynamic(() => import("@/components/ui/icons/IconOnWait"));
+const IconError = dynamic(() => import("@/components/ui/icons/IconError"));
+const IconDone = dynamic(() => import("@/components/ui/icons/IconDone"));
 
 type FileTreeItemProps = {
   item: RepoTreeItem;
@@ -124,7 +126,7 @@ function FileTreeItem({
       case "onCheck":
         return <IconOnProcess className="animate-spin" />; // 처리 중임을 더 명확하게 표시
       case "onWait":
-        return <IconOnWait className="text-gray-default" />;
+        return <IconOnWait />;
       case "error":
         return <IconError />;
       case "success":
@@ -167,7 +169,7 @@ function FileTreeItem({
             {type === "dir" ? (
               <IconCaretLeft
                 className={cn(
-                  "inline-block size-4 rotate-180 fill-black mr-1",
+                  "mr-1 inline-block size-4 rotate-180 fill-black",
                   isFolderExpanded && "-rotate-90",
                 )}
               />

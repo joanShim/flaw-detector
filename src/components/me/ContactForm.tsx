@@ -1,27 +1,27 @@
 "use client";
 
 import { useSessionStore } from "@/context/SessionProvider";
-import {
-  EMAIL_VALIDATION_MESSAGE,
-  MESSAGE_VALIDATION_MESSAGE,
-  NAME_VALIDATION_MESSAGE,
-  SERVER_ERROR_MESSAGE,
-} from "@/lib/const";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import { Input } from "../ui/Input";
-import {
-  Modal,
-  ModalDescription,
-  ModalTitle,
-  ModalTitleWrapper,
-} from "../ui/Modal";
 import { TextArea } from "../ui/TextArea";
 
-type RequestState = "idle" | "loading" | "success" | "error";
+export type RequestState = "idle" | "loading" | "success" | "error";
 type InvalidField = "name" | "email" | "message";
+
+const NAME_VALIDATION_MESSAGE = "이름은 공백 없이 2자 이상이어야 합니다.";
+const EMAIL_VALIDATION_MESSAGE = "이메일 형식이 유효하지 않습니다.";
+const MESSAGE_VALIDATION_MESSAGE = "메세지는 5자 이상이어야 합니다.";
+const SERVER_ERROR_MESSAGE =
+  "서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.";
+
+const ContactSuccessModal = dynamic(
+  () => import("@/components/me/ContactModal"),
+  {
+    ssr: false,
+  },
+);
 
 function ValidationError({
   invalidField,
@@ -42,44 +42,6 @@ function ValidationError({
     <p className="mt-1 text-lg font-semibold text-red-500">
       {validationMessages[invalidField]}
     </p>
-  );
-}
-
-function ContactSuccessModal({
-  requestState,
-  setRequestState,
-}: {
-  requestState: RequestState;
-  setRequestState: React.Dispatch<React.SetStateAction<RequestState>>;
-}) {
-  const router = useRouter();
-
-  return (
-    <Modal
-      variant="inquirySubmitted"
-      size="extraLarge"
-      isOpen={requestState === "success"}
-      className="top-0 border border-primary-500"
-    >
-      <ModalTitleWrapper variant="inquirySubmitted">
-        <ModalTitle size="big" weight="bold">
-          문의를 보냈어요!
-        </ModalTitle>
-        <ModalDescription size="big" className="font-medium text-[#8F8F8F]">
-          문의를 성공적으로 전송했어요. 빠른 시일 내에 답변해드릴게요.
-        </ModalDescription>
-      </ModalTitleWrapper>
-      <Button
-        type="button"
-        onClick={() => {
-          setRequestState("idle");
-          router.push("/");
-        }}
-        className="mt-14 h-14 w-[20.938rem] rounded-2xl text-[1.25rem] tracking-[-0.011em]"
-      >
-        홈으로 가기
-      </Button>
-    </Modal>
   );
 }
 
@@ -125,10 +87,6 @@ export default function ContactForm() {
         body: formData,
       });
 
-      if (!res.ok) {
-        throw new Error(`response status: ${res.status}`);
-      }
-
       const { message: responseMessage } = await res.json();
 
       switch (responseMessage) {
@@ -165,13 +123,11 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmitForm}
-      className={cn(
-        "flex size-full max-w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12",
-      )}
+      className="flex size-full max-w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12"
     >
       <div>
         <h3 className="mb-4 text-2xl font-bold leading-9">문의하기</h3>
-        <p className="text-base font-medium tracking-[-0.011em] text-[#8F8F8F]">
+        <p className="text-base font-medium tracking-[-0.011em] text-gray-default">
           문의하고싶은 내용을 구체적으로 작성해주셔야 피드백이 정상적으로
           반영됩니다.
         </p>
@@ -249,10 +205,12 @@ export default function ContactForm() {
       </div>
 
       {/* Modal for SUCCESS */}
-      <ContactSuccessModal
-        requestState={requestState}
-        setRequestState={setRequestState}
-      />
+      {requestState === "success" && (
+        <ContactSuccessModal
+          requestState={requestState}
+          setRequestState={setRequestState}
+        />
+      )}
     </form>
   );
 }

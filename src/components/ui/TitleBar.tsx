@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Button from "./Button";
-import { IconCaretLeft } from "./Icons";
+import IconCaretLeft from "./icons/IconCaretLeft";
 
 type TitleBarProps = {
   hasBackButton?: boolean;

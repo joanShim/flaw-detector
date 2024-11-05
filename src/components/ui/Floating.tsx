@@ -3,7 +3,10 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
-import { IconArrow, IconChat } from "./Icons";
+import dynamic from "next/dynamic";
+
+const IconChat = dynamic(() => import("@/components/ui/icons/IconChat"));
+const IconArrow = dynamic(() => import("@/components/ui/icons/IconArrow"));
 
 const floatingVariants = cva(
   "w-[4.75rem] h-[4.75rem] border-[0.091rem] border-primary-500 rounded-full text-primary-500 flex-center-center flex-col z-20",
@@ -22,9 +25,11 @@ export type FloatingProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Floating = React.forwardRef<HTMLButtonElement, FloatingProps>(
   ({ className, variant, ...props }, ref) => {
+    const isTopFloating = variant === "top";
     return (
       <button
         type="button"
+        aria-label={isTopFloating ? "맨 위로 이동하기" : "채팅하기 (미지원)"}
         className={cn(
           floatingVariants({ variant }),
           className,
@@ -33,12 +38,8 @@ const Floating = React.forwardRef<HTMLButtonElement, FloatingProps>(
         ref={ref}
         {...props}
       >
-        {variant === "top" ? (
-          <IconArrow className="h-7 w-7" />
-        ) : (
-          <IconChat className="h-[2.103rem] w-[2.103rem]" />
-        )}
-        {variant === "top" && <span>TOP</span>}
+        {isTopFloating ? <IconArrow className="h-7 w-7" /> : <IconChat />}
+        {isTopFloating && <span>TOP</span>}
       </button>
     );
   },
