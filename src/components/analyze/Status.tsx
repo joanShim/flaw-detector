@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
-import { IconClose, IconTriangle, IconCircle } from "../ui/Icons";
+import IconClose from "../ui/icons/IconClose";
+import IconTriangle from "../ui/icons/IconTriangle";
+import IconCircle from "../ui/icons/IconCircle";
 
 const statusType = {
   error: {

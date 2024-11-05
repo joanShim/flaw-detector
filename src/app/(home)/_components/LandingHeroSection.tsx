@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/Button";
-import { IconCaretDoubleDown } from "@/components/ui/Icons";
+import IconCaretDoubleDown from "@/components/ui/icons/IconCaretDoubleDown";
 import { loginWithGithub } from "@/lib/actions";
 import Link from "next/link";
 import { useTransition } from "react";

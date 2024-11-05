@@ -6,7 +6,8 @@ import FileTreeItemDemo, {
 } from "@/components/analyze/FileTree/FileTreeItemDemo";
 import { Status, StatusMessage } from "@/components/analyze/Status";
 import Button from "@/components/ui/Button";
-import { IconList, IconMultiSelect } from "@/components/ui/Icons";
+import IconList from "@/components/ui/icons/IconList";
+import IconMultiSelect from "@/components/ui/icons/IconMultiSelect";
 import TitleBar from "@/components/ui/TitleBar";
 import { exampleCode } from "@/lib/dummy";
 import { FileResultProps } from "@/types/file";
@@ -190,7 +191,7 @@ export default function LandingDemoSection() {
         </div>
       </section>
       <section className="flex-col-center w-fit! gap-y-[2.125rem] leading-tight">
-        <h3 className="flex-col-end-center w-full space-y-3 truncate text-clamp-3xl font-bold -tracking-[0.011em] text-primary-500">
+        <h3 className="flex-col-end-center text-clamp-3xl w-full space-y-3 truncate font-bold -tracking-[0.011em] text-primary-500">
           <span className="fade-up-element opacity-0">최신 보안 동향을</span>
           <span className="fade-up-element opacity-0">
             실시간으로 확인하세요.

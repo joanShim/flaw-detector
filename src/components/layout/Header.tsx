@@ -2,7 +2,7 @@
 
 import { Aldrich } from "next/font/google";
 import Link from "next/link";
-import { IconBug } from "../ui/Icons";
+import IconBug from "../ui/icons/IconBug";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 

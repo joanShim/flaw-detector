@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
-import { IconClose } from "./Icons";
+import IconClose from "./icons/IconClose";
 
 const switchVariants = cva("flex h-8 w-14 items-center rounded-[6.25rem]", {
   variants: {

@@ -5,8 +5,10 @@ import { cn } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Session } from "next-auth";
 import { memo, useCallback, useState } from "react";
-import { IconStar } from "../ui/Icons";
 import ExceptionHandlingMessage from "../vulnerability-db/ExceptionHandlingMessage";
+import dynamic from "next/dynamic";
+
+const IconStar = dynamic(() => import("@/components/ui/icons/IconStar"));
 
 const updateFavoriteRepo = async (
   username: string,

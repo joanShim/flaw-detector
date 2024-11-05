@@ -5,8 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import FileTree from "./FileTree";
 import { useEffect, useRef, useState } from "react";
 import { useFileSelectionStore } from "@/stores/useFileSelectionStore";
-import { IconList, IconMultiSelect } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
+import IconMultiSelect from "@/components/ui/icons/IconMultiSelect";
+import IconList from "@/components/ui/icons/IconList";
 
 export default function FileList({
   repo,
