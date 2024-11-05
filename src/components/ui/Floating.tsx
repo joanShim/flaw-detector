@@ -36,11 +36,7 @@ const Floating = React.forwardRef<HTMLButtonElement, FloatingProps>(
         ref={ref}
         {...props}
       >
-        {variant === "top" ? (
-          <IconArrow className="h-7 w-7" />
-        ) : (
-          <IconChat className="h-[2.103rem] w-[2.103rem]" />
-        )}
+        {variant === "top" ? <IconArrow className="h-7 w-7" /> : <IconChat />}
         {variant === "top" && <span>TOP</span>}
       </button>
     );

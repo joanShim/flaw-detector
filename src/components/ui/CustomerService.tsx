@@ -1,14 +1,8 @@
-import { cn } from "@/lib/utils";
 import ContactForm from "../me/ContactForm";
 
-export default function CustomerService({ className }: { className?: string }) {
+export default function CustomerService() {
   return (
-    <section
-      className={cn(
-        "mx-auto flex h-[50.813rem] w-full max-w-[96.125rem] justify-between px-[1rem]",
-        className,
-      )}
-    >
+    <section className="mx-auto my-[7.75rem] flex h-[50.813rem] w-full max-w-[96.125rem] justify-between px-[1rem]">
       <div className="h-full w-[28.125rem]">
         <h2 className="text-6xl font-bold leading-[5.625rem] tracking-tighter text-primary-500">
           서비스 이용에

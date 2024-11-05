@@ -1,9 +1,4 @@
-import { cn } from "@/lib/utils";
-
-export default function IconFolder({
-  className,
-  ...props
-}: React.ComponentProps<"svg">) {
+export default function IconFolder({ ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       width="24"
@@ -11,7 +6,6 @@ export default function IconFolder({
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
       {...props}
     >
       <path

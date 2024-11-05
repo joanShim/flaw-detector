@@ -1,9 +1,4 @@
-import { cn } from "@/lib/utils";
-
-export default function IconShare({
-  className,
-  ...props
-}: React.ComponentProps<"svg">) {
+export default function IconShare({ ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       width="28"
@@ -11,7 +6,7 @@ export default function IconShare({
       viewBox="0 0 28 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
+      className="h-[1.438rem] w-[1.75rem]"
       {...props}
     >
       <path

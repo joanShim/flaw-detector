@@ -165,7 +165,7 @@ export const Alert = ({
         </div>
 
         <div className="shrink-0 basis-8">
-          <IconThinClose className="size-8 cursor-pointer" onClick={onClose} />
+          <IconThinClose onClick={onClose} />
         </div>
       </div>
     )

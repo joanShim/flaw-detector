@@ -1,7 +1,4 @@
-import { cn } from "@/lib/utils";
-
 export default function IconFilledShare({
-  className,
   ...props
 }: React.ComponentProps<"svg">) {
   return (
@@ -11,7 +8,7 @@ export default function IconFilledShare({
       viewBox="0 0 28 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
+      className="h-[1.438rem] w-[1.75rem]"
       {...props}
     >
       <path

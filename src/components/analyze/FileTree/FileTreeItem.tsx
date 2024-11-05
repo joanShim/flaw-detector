@@ -126,7 +126,7 @@ function FileTreeItem({
       case "onCheck":
         return <IconOnProcess className="animate-spin" />; // 처리 중임을 더 명확하게 표시
       case "onWait":
-        return <IconOnWait className="text-gray-default" />;
+        return <IconOnWait />;
       case "error":
         return <IconError />;
       case "success":

@@ -1,9 +1,4 @@
-import { cn } from "@/lib/utils";
-
-export default function IconChat({
-  className,
-  ...props
-}: React.ComponentProps<"svg">) {
+export default function IconChat({ ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       width="35"
@@ -11,7 +6,7 @@ export default function IconChat({
       viewBox="0 0 35 35"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
+      className="h-[2.103rem] w-[2.103rem]"
       {...props}
     >
       <path

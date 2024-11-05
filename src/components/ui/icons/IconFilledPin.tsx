@@ -1,7 +1,4 @@
-import { cn } from "@/lib/utils";
-
 export default function IconFilledPin({
-  className,
   ...props
 }: React.ComponentProps<"svg">) {
   return (
@@ -11,7 +8,7 @@ export default function IconFilledPin({
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
+      className="h-[1.625rem] w-[1.625rem]"
       {...props}
     >
       <path

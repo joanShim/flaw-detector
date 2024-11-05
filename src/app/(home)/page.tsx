@@ -14,7 +14,7 @@ export default async function LandingPage() {
       <LandingFeatureSection />
       <LandingDemoSection />
       <LandingServiceSection />
-      <CustomerService className="my-[6.5rem]" />
+      <CustomerService />
       <LandingTopFloating />
     </div>
   );

@@ -1,9 +1,4 @@
-import { cn } from "@/lib/utils";
-
-export default function IconError({
-  className,
-  ...props
-}: React.ComponentProps<"svg">) {
+export default function IconError({ ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       width="20"
@@ -11,7 +6,6 @@ export default function IconError({
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(className)}
       {...props}
     >
       <path
