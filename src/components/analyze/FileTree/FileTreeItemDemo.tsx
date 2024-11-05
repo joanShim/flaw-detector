@@ -1,13 +1,11 @@
 "use client";
 
-import {
-  IconCaretLeft,
-  IconCloseFolder,
-  IconDoc,
-  IconDone,
-  IconOpenFolder,
-  IconStar,
-} from "@/components/ui/Icons";
+import IconCaretLeft from "@/components/ui/icons/IconCaretLeft";
+import IconCloseFolder from "@/components/ui/icons/IconCloseFolder";
+import IconDoc from "@/components/ui/icons/IconDoc";
+import IconDone from "@/components/ui/icons/IconDone";
+import IconOpenFolder from "@/components/ui/icons/IconOpenFolder";
+import IconStar from "@/components/ui/icons/IconStar";
 import { cn } from "@/lib/utils";
 import { memo, useMemo } from "react";
 
