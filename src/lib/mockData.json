@@ -1,0 +1,170 @@
+{
+  "vulnerabilities": [
+    {
+      "name": "SQL 인젝션 취약점",
+      "vulnerability": "사용자 입력이 SQL 쿼리에 직접 삽입되어 있습니다.",
+      "severity": "Critical",
+      "descriptions": [
+        "공격자가 악의적인 SQL 쿼리를 주입하여 데이터베이스를 조작할 수 있습니다.",
+        "데이터베이스의 무단 접근, 수정, 삭제가 가능하며 전체 시스템이 손상될 수 있습니다.",
+        "Prepared Statements나 ORM을 사용하여 쿼리 파라미터를 안전하게 처리해야 합니다."
+      ],
+      "lines": "15-18",
+      "modified_codes": [
+        "const userId = req.params.id;",
+        "const query = \"SELECT * FROM users WHERE id = ?\";",
+        "const [results] = await connection.execute(query, [userId]);"
+      ]
+    },
+    {
+      "name": "안전하지 않은 암호화 방식",
+      "vulnerability": "비밀번호가 MD5와 같은 취약한 해시 함수로 암호화되어 있습니다.",
+      "severity": "High",
+      "descriptions": [
+        "해시 충돌과 레인보우 테이블을 이용한 공격으로 비밀번호가 노출될 수 있습니다.",
+        "사용자 계정 탈취와 개인정보 유출이 발생할 수 있습니다.",
+        "bcrypt나 Argon2와 같은 현대적인 해시 알고리즘을 사용해야 합니다."
+      ],
+      "lines": "24-26",
+      "modified_codes": [
+        "const bcrypt = require(\"bcrypt\");",
+        "const saltRounds = 10;",
+        "const hashedPassword = await bcrypt.hash(password, saltRounds);"
+      ]
+    },
+    {
+      "name": "크로스 사이트 스크립팅(XSS)",
+      "vulnerability": "사용자 입력값이 이스케이프 처리 없이 HTML에 직접 삽입되고 있습니다.",
+      "severity": "High",
+      "descriptions": [
+        "악성 스크립트 주입을 통해 사용자의 브라우저에서 악의적인 코드가 실행될 수 있습니다.",
+        "사용자의 세션 탈취와 개인정보 유출이 가능합니다.",
+        "모든 사용자 입력값에 대해 적절한 이스케이프 처리를 수행해야 합니다."
+      ],
+      "lines": "32-34",
+      "modified_codes": [
+        "const DOMPurify = require(\"dompurify\");",
+        "const sanitizedInput = DOMPurify.sanitize(userInput);",
+        "res.send(`<div>${sanitizedInput}</div>`);"
+      ]
+    },
+    {
+      "name": "취약한 세션 관리",
+      "vulnerability": "세션 ID가 안전하지 않은 방식으로 생성되고 있습니다.",
+      "severity": "High",
+      "descriptions": [
+        "예측 가능한 세션 ID로 인해 세션 하이재킹 공격이 가능합니다.",
+        "인증된 사용자의 세션이 탈취되어 계정이 무단으로 사용될 수 있습니다.",
+        "암호학적으로 안전한 난수 생성기를 사용하여 세션 ID를 생성해야 합니다."
+      ],
+      "lines": "45-47",
+      "modified_codes": [
+        "const crypto = require(\"crypto\");",
+        "const sessionId = crypto.randomBytes(32).toString(\"hex\");",
+        "res.cookie(\"sessionId\", sessionId, { httpOnly: true, secure: true });"
+      ]
+    },
+    {
+      "name": "안전하지 않은 파일 업로드",
+      "vulnerability": "파일 업로드 시 파일 형식과 크기에 대한 검증이 없습니다.",
+      "severity": "Medium",
+      "descriptions": [
+        "악성 파일 업로드를 통한 서버 측 실행이 가능할 수 있습니다.",
+        "서버 시스템 침투와 원격 코드 실행이 가능할 수 있습니다.",
+        "파일 확장자 검증, MIME 타입 검사, 파일 크기 제한을 구현해야 합니다."
+      ],
+      "lines": "55-57",
+      "modified_codes": [
+        "const allowedTypes = [\"image/jpeg\", \"image/png\"];",
+        "if (!allowedTypes.includes(file.mimetype)) throw new Error(\"Invalid file type\");",
+        "if (file.size > 5 * 1024 * 1024) throw new Error(\"File too large\");"
+      ]
+    },
+    {
+      "name": "불충분한 로깅",
+      "vulnerability": "중요한 보안 이벤트에 대한 로깅이 누락되어 있습니다.",
+      "severity": "Medium",
+      "descriptions": [
+        "보안 사고 발생 시 추적과 분석이 어려울 수 있습니다.",
+        "침해 사고 대응과 포렌식 분석이 제한될 수 있습니다.",
+        "중요 보안 이벤트에 대해 상세한 로깅을 구현해야 합니다."
+      ],
+      "lines": "67-69",
+      "modified_codes": [
+        "const winston = require(\"winston\");",
+        "logger.info(\"Security event\", {",
+        "  event: \"login_attempt\", userId, timestamp: new Date(), ip: req.ip",
+        "});"
+      ]
+    },
+    {
+      "name": "안전하지 않은 직접 객체 참조",
+      "vulnerability": "사용자 입력값으로 직접 데이터베이스 레코드를 참조하고 있습니다.",
+      "severity": "Medium",
+      "descriptions": [
+        "권한 없는 사용자가 다른 사용자의 데이터에 접근할 수 있습니다.",
+        "개인정보 유출과 데이터 무단 접근이 가능합니다.",
+        "사용자 권한 검증과 간접 참조 방식을 구현해야 합니다."
+      ],
+      "lines": "78-80",
+      "modified_codes": [
+        "const userId = req.user.id;",
+        "const canAccess = await checkUserPermission(userId, resourceId);",
+        "if (!canAccess) throw new Error(\"Access denied\");"
+      ]
+    },
+    {
+      "name": "취약한 패스워드 정책",
+      "vulnerability": "비밀번호 복잡도 요구사항이 설정되어 있지 않습니다.",
+      "severity": "Medium",
+      "descriptions": [
+        "무차별 대입 공격으로 약한 비밀번호가 쉽게 노출될 수 있습니다.",
+        "계정 탈취와 무단 접근이 발생할 수 있습니다.",
+        "최소 길이, 복잡도, 이력 관리 등의 암호 정책을 구현해야 합니다."
+      ],
+      "lines": "89-91",
+      "modified_codes": [
+        "const passwordRegex = /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$/;",
+        "if (!passwordRegex.test(password)) {",
+        "  throw new Error(\"Password does not meet security requirements\");"
+      ]
+    },
+    {
+      "name": "불충분한 에러 처리",
+      "vulnerability": "상세한 에러 메시지가 사용자에게 직접 노출되고 있습니다.",
+      "severity": "Low",
+      "descriptions": [
+        "시스템 내부 정보가 공격자에게 노출될 수 있습니다.",
+        "취약점 분석과 공격 벡터 식별에 활용될 수 있습니다.",
+        "사용자에게는 일반적인 에러 메시지를 보여주고 상세 내용은 로깅해야 합니다."
+      ],
+      "lines": "102-104",
+      "modified_codes": [
+        "try {",
+        "  // 작업 수행",
+        "} catch (error) {",
+        "  logger.error(\"Operation failed\", { error });",
+        "  res.status(500).json({ message: \"An error occurred\" });",
+        "}"
+      ]
+    },
+    {
+      "name": "민감한 데이터 노출",
+      "vulnerability": "API 응답에 민감한 사용자 정보가 포함되어 있습니다.",
+      "severity": "Medium",
+      "descriptions": [
+        "불필요한 민감 정보가 네트워크 상에서 노출될 수 있습니다.",
+        "개인정보 유출과 프라이버시 침해가 발생할 수 있습니다.",
+        "응답 데이터를 필터링하여 필요한 정보만 포함해야 합니다."
+      ],
+      "lines": "112-114",
+      "modified_codes": [
+        "const { password, ssn, ...safeUserData } = userData;",
+        "res.json({ user: safeUserData });"
+      ]
+    },
+    {
+      "message": "No vulnerabilities"
+    }
+  ]
+}
