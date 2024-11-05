@@ -1,9 +1,21 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isLandingPage = pathname === "/";
+
   return (
-    <footer className="relative h-[20.25rem] w-full bg-purple-light">
+    <footer
+      className={cn(
+        "relative h-[20.25rem] w-full bg-purple-light",
+        isLandingPage ? "snap-start snap-always" : "",
+      )}
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

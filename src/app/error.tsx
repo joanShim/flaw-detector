@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function error({
+export default function Error({
   error,
   reset,
 }: {
@@ -69,7 +69,7 @@ export default function error({
           <Button className="w-fit" onClick={() => reset()} variant="outlined">
             다시 시도하기
           </Button>
-          <Button className="w-fit" variant='filled'>
+          <Button className="w-fit" variant="filled">
             <Link href="/" passHref>
               홈으로 가기
             </Link>

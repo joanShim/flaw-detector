@@ -123,7 +123,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmitForm}
-      className="flex h-full w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12"
+      className="flex size-full max-w-[61.563rem] flex-col gap-8 rounded-[2.5rem] border border-primary-500 bg-white px-[3.75rem] py-12"
     >
       <div>
         <h3 className="mb-4 text-2xl font-bold leading-9">문의하기</h3>

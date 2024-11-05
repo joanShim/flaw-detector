@@ -11,6 +11,7 @@ type TitleBarProps = {
   title: string;
   align?: "start" | "center";
   h1ClassName?: string;
+  as?: keyof JSX.IntrinsicElements;
 };
 
 export default function TitleBar({
@@ -20,6 +21,7 @@ export default function TitleBar({
   align = "start",
   className,
   h1ClassName,
+  as: Title = "h1",
   ...props
 }: TitleBarProps & React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
@@ -55,7 +57,7 @@ export default function TitleBar({
           <IconCaretLeft className="stroke-primary-500 stroke-[0.1rem]" />
         </Button>
       )}
-      <h1
+      <Title
         className={cn(
           "flex size-full h-fit rounded-full border-[0.25rem] border-primary-500 px-[2rem] py-3 text-[2.5rem] leading-tight -tracking-[0.01em] text-primary-500",
           hasBackButton && "ml-[1.5rem]",
@@ -64,7 +66,7 @@ export default function TitleBar({
         )}
       >
         {title}
-      </h1>
+      </Title>
     </div>
   );
 }

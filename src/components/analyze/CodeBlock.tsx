@@ -49,7 +49,7 @@ export default function CodeBlock({
             {isCopied ? (
               <IconCheck className="size-5 fill-gray-light" />
             ) : (
-              <IconCopy />
+              <IconCopy className="size-5" />
             )}
             <span className={isCopied ? "text-white" : ""}>
               {isCopied ? "복사완료" : "코드복사"}

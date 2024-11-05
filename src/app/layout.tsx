@@ -1,11 +1,11 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import { SessionStoreProvider } from "@/context/SessionProvider";
 import ReactQueryProviders from "@/lib/queries/useReactQuery";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SessionStoreProvider } from "@/context/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,15 +30,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard ${inter.className} min-w-[64rem]`}
+        className={`${pretendard.variable} font-pretendard ${inter.className} w-dvw md:min-w-[64rem]`}
       >
-        <Header />
-        <main className="min-h-[calc(100dvh-8.5rem)]">
+        <div className="relative h-dvh snap-y snap-mandatory overflow-y-auto overflow-x-hidden">
+          <Header />
           <SessionStoreProvider>
             <ReactQueryProviders>{children}</ReactQueryProviders>
           </SessionStoreProvider>
-        </main>
-        <Footer />
+          <Footer />
+        </div>
       </body>
     </html>
   );
