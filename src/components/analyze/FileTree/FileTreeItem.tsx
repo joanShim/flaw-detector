@@ -8,6 +8,7 @@ import { useFileBookmarkStore } from "@/stores/useFileBookmarkStore";
 import { useFileProcessStore } from "@/stores/useFileProcessStore";
 import { useFileSelectionStore } from "@/stores/useFileSelectionStore";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
+import { FileStatus } from "@/types/file";
 import dynamic from "next/dynamic";
 import React, { useCallback, useMemo, useState } from "react";
 import Checkbox from "./Checkbox";
@@ -38,7 +39,7 @@ function FileTreeItem({
   const setCurrentFile = useFileViewerStore((state) => state.setCurrentFile);
 
   const isCurrentFile = useFileViewerStore(
-    useCallback((state) => state.currentFile === path, [path]),
+    (state) => state.currentFile === path,
   );
 
   const isCheckboxVisible = useFileSelectionStore(
@@ -61,17 +62,15 @@ function FileTreeItem({
     isFileBookmarked(repo, path),
   );
 
-  const getFileStatus = useFileProcessStore((state) => state.getFileStatus);
+  const fileStatus = useFileProcessStore((state) => state.getFileStatus(path));
 
-  const fileStatus = getFileStatus(path);
+  const isImage = getLanguage(name) === "image";
 
-  const isImage = useMemo(() => getLanguage(name) === "image", [name]);
-
-  const toggleFolder = useCallback(() => {
+  const toggleFolder = () => {
     if (isFolder) {
       setIsFolderExpanded((prev) => !prev);
     }
-  }, [isFolder]);
+  };
 
   const handleItemClick = useCallback(
     (e: React.MouseEvent<HTMLLIElement>) => {
@@ -122,22 +121,19 @@ function FileTreeItem({
       );
   }, [type]);
 
-  const typeIcon = useMemo(() => {
-    if (type === "file") {
-      return <IconDoc width={20} />;
-    } else {
-      return isFolderExpanded ? (
-        <IconOpenFolder width={20} height={20} />
-      ) : (
-        <IconCloseFolder width={20} height={20} />
-      );
-    }
-  }, [isFolderExpanded]);
+  const typeIcon =
+    type === "file" ? (
+      <IconDoc width={20} />
+    ) : isFolderExpanded ? (
+      <IconOpenFolder width={20} height={20} />
+    ) : (
+      <IconCloseFolder width={20} height={20} />
+    );
 
-  const statusIcon = useMemo(() => {
-    switch (fileStatus) {
+  const getStatusIcon = (status: FileStatus | null) => {
+    switch (status) {
       case "onCheck":
-        return <IconOnProcess className="animate-spin" />; // 처리 중임을 더 명확하게 표시
+        return <IconOnProcess className="animate-spin" />;
       case "onWait":
         return <IconOnWait />;
       case "error":
@@ -147,7 +143,7 @@ function FileTreeItem({
       default:
         return null;
     }
-  }, [fileStatus]);
+  };
 
   // 깊이에 따른 padding 및 indicator (동적생성 이슈로 인라인스타일 지정)
   const BASE_PADDING = 8;
@@ -221,7 +217,9 @@ function FileTreeItem({
             </div>
           )}
           {fileStatus && (
-            <div className="flex-center-center pl-1"> {statusIcon}</div>
+            <div className="flex-center-center pl-1">
+              {getStatusIcon(fileStatus)}
+            </div>
           )}
         </div>
       </li>
@@ -242,10 +240,4 @@ function FileTreeItem({
   );
 }
 
-export default React.memo(FileTreeItem, (prevProps, nextProps) => {
-  return (
-    prevProps.item.path === nextProps.item.path &&
-    prevProps.level === nextProps.level &&
-    prevProps.repo === nextProps.repo
-  );
-});
+export default React.memo(FileTreeItem);
