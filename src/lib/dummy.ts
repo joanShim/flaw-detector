@@ -36,35 +36,6 @@ export default function Home() {
         </Card>
         <Card className="bg-transparent backdrop-blur-sm">`;
 
-//selectedfile 모달에서 쓰이는 더미데이터
-export const dummyFileItems = [
-  {
-    title: "file name 1",
-    subtitle: "file sub title 1",
-    date: "4 months ago",
-  },
-  {
-    title: "file name 2",
-    subtitle: "file sub title 2",
-    date: "4 months ago",
-  },
-  {
-    title: "file name 3",
-    subtitle: "file sub title 3",
-    date: "4 months ago",
-  },
-  {
-    title: "file name 4",
-    subtitle: "file sub title 4",
-    date: "4 months ago",
-  },
-  {
-    title: "file name 5",
-    subtitle: "file sub title 5",
-    date: "4 months ago",
-  },
-];
-
 export const koreanLoremIpsum = `대통령은 필요하다고 인정할 때에는 외교·국방·통일 기타 국가안위에 관한 중요정책을 국민투표에 붙일 수 있다. 국가는 사회보장·사회복지의 증진에 노력할 의무를 진다.
 국민의 모든 자유와 권리는 국가안전보장·질서유지 또는 공공복리를 위하여 필요한 경우에 한하여 법률로써 제한할 수 있으며, 제한하는 경우에도 자유와 권리의 본질적인 내용을 침해할 수 없다.
 대통령의 국법상 행위는 문서로써 하며, 이 문서에는 국무총리와 관계 국무위원이 부서한다. 군사에 관한 것도 또한 같다. 타인의 범죄행위로 인하여 생명·신체에 대한 피해를 받은 국민은 법률이 정하는 바에 의하여 국가로부터 구조를 받을 수 있다.
