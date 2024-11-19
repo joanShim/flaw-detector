@@ -10,6 +10,7 @@ export function useVulDBPosts(
   currentPage: number,
   itemsPerPage: number,
   selectedChip: "hot" | "new" | "",
+  searchTerm: string[] | null = null,
 ) {
   const queryClient = useQueryClient();
   const { data: hotPostIds = [] } = useHotPostIds();
@@ -41,12 +42,13 @@ export function useVulDBPosts(
   });
 
   const postsQuery = useQuery<any, Error>({
-    queryKey: ["posts", userId, currentPage, selectedChip],
+    queryKey: ["posts", userId, currentPage, selectedChip, searchTerm],
     queryFn: async () => {
       const { posts, lastVisiblePost: lastVisible } = await getPaginatedPosts(
         100,
         null,
         userId,
+        searchTerm,
       );
       lastVisiblePost.current = lastVisible;
 
@@ -64,7 +66,7 @@ export function useVulDBPosts(
             : new Date(0);
           const diffInHours =
             (now.getTime() - postDate.getTime()) / (1000 * 60 * 60);
-          return diffInHours <= 48;
+          return diffInHours <= 48 && !hotPostIds.includes(post.id);
         });
       }
 
@@ -106,10 +108,10 @@ export function useVulDBPosts(
     latestPosts: latestPostsQuery.data || [],
     prefetchPage: (page: number) => {
       queryClient.prefetchQuery({
-        queryKey: ["posts", userId, page, selectedChip],
+        queryKey: ["posts", userId, page, selectedChip, searchTerm],
         queryFn: async () => {
           const { posts, lastVisiblePost: lastVisible } =
-            await getPaginatedPosts(100, null, userId);
+            await getPaginatedPosts(100, null, userId, searchTerm);
 
           lastVisiblePost.current = lastVisible;
 
@@ -129,7 +131,7 @@ export function useVulDBPosts(
                 : new Date(0);
               const diffInHours =
                 (now.getTime() - postDate.getTime()) / (1000 * 60 * 60);
-              return diffInHours <= 48;
+              return diffInHours <= 48 && !hotPostIds.includes(post.id);
             });
           }
 

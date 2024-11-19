@@ -1,8 +1,10 @@
 "use client";
 
 import { useRepoListStore } from "@/stores/useRepoListStore";
+import { useShallow } from "zustand/react/shallow";
 import Button from "../ui/Button";
-import { IconBookmarkFolder, IconClockCounterClockwise } from "../ui/Icons";
+import IconBookmarkFolder from "../ui/icons/IconBookmarkFolder";
+import IconClockCounterClockwise from "../ui/icons/IconClockCounterClockwise";
 
 const buttonType = {
   bookmark: {
@@ -21,19 +23,13 @@ export default function RepoFilterButton({
   type: "bookmark" | "recent-files";
 }) {
   // recent file 용
-  const filterByRecentClicked = useRepoListStore(
-    (state) => state.filterByRecentClicked,
-  );
-  const setFilterByRecentClicked = useRepoListStore(
-    (state) => state.setFilterByRecentClicked,
+  const { filterByRecentClicked, setFilterByRecentClicked } = useRepoListStore(
+    useShallow((state) => state),
   );
 
   // bookmark 용
-  const filterByBookmarked = useRepoListStore(
-    (state) => state.filterByBookmarked,
-  );
-  const setFilterByBookmarked = useRepoListStore(
-    (state) => state.setFilterByBookmarked,
+  const { filterByBookmarked, setFilterByBookmarked } = useRepoListStore(
+    useShallow((state) => state),
   );
 
   const isActive =
@@ -51,7 +47,7 @@ export default function RepoFilterButton({
     <Button
       variant="outlined-gray"
       shape="rounded-xl"
-      className={isActive ? "bg-purple-dark" : ""}
+      className={isActive ? "bg-purple-dark" : "bg-white"}
       onClick={onClickFilter}
     >
       {buttonType[type].icon}

@@ -10,7 +10,8 @@ import {
   CardSubTitle,
   CardTitle,
 } from "../ui/Card";
-import { IconBug, IconCaretLeft } from "../ui/Icons";
+import IconBug from "../ui/icons/IconBug";
+import IconCaretLeft from "../ui/icons/IconCaretLeft";
 import { Label, LabelProps } from "../ui/Label";
 import RepoBookmark from "./RepoBookmark";
 
@@ -55,7 +56,7 @@ function Repo({
   };
 
   return (
-    <Card key={id} className="group relative">
+    <Card key={id} className="group relative max-w-none">
       <CardHeader>
         {detectedStatus !== "notChecked" ? (
           <>
@@ -81,7 +82,11 @@ function Repo({
         )}
       </CardHeader>
       <CardFooter>
-        <Link href={`/repos/${repositoryName}`} className="basis-[9.153rem]">
+        <Link
+          prefetch
+          href={`/repos/${repositoryName}`}
+          className="basis-[9.153rem]"
+        >
           <Button
             variant="filled"
             shape="rounded"

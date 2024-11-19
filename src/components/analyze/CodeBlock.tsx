@@ -1,9 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { IconCheck, IconCopy } from "../ui/Icons";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import { cn, getLanguage } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import IconCheck from "@/components/ui/icons/IconCheck";
+
+const IconCopy = dynamic(() => import("@/components/ui/icons/IconCopy"));
 
 export default function CodeBlock({
   className,
@@ -46,7 +49,7 @@ export default function CodeBlock({
             {isCopied ? (
               <IconCheck className="size-5 fill-gray-light" />
             ) : (
-              <IconCopy />
+              <IconCopy className="size-5" />
             )}
             <span className={isCopied ? "text-white" : ""}>
               {isCopied ? "복사완료" : "코드복사"}

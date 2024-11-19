@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useFileViewerStore } from "@/stores/useFileViewerStore";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { IconMagnifierWithPlus } from "../ui/Icons";
+import IconMagnifierWithPlus from "../ui/icons/IconMagnifierWithPlus";
 
 const SyntaxHighlighter = dynamic(
   () => import("react-syntax-highlighter").then((mod) => mod.Prism),
@@ -121,7 +121,7 @@ export default function CodeViewer({
         PreTag={({ children, ...props }) => (
           <pre
             {...props}
-            className="!m-0 h-full w-full max-w-full !overflow-x-auto"
+            className="!m-0 size-full max-w-full !overflow-x-auto"
             ref={codeRef}
           >
             {children}

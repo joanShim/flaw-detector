@@ -5,8 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import FileTree from "./FileTree";
 import { useEffect, useRef, useState } from "react";
 import { useFileSelectionStore } from "@/stores/useFileSelectionStore";
-import { IconList, IconMultiSelect } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
+import IconMultiSelect from "@/components/ui/icons/IconMultiSelect";
+import IconList from "@/components/ui/icons/IconList";
 
 export default function FileList({
   repo,
@@ -42,7 +43,7 @@ export default function FileList({
   const handleToggleMultiSelection = () => {
     toggleCheckboxVisibility();
     clearSelection();
-  }
+  };
 
   const handleSortChange = (option: SortOption) => {
     setSortOption(option);
@@ -59,10 +60,13 @@ export default function FileList({
               onClick={handleToggleMultiSelection}
               title="파일 다중 선택 활성화"
             >
-              <IconMultiSelect />
+              <IconMultiSelect width={20} />
             </button>
             <button className="relative" title="리스트 정렬 옵션">
-              <IconList onClick={() => setIsSortListOpen(!isSortListOpen)} />
+              <IconList
+                width={20}
+                onClick={() => setIsSortListOpen(!isSortListOpen)}
+              />
               {isSortListOpen && (
                 <div className="absolute right-0 top-full z-50 mt-1">
                   <SortOptionList

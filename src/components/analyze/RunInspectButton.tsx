@@ -136,7 +136,6 @@ export default function RunInspectButton({
   const renderFileList = () => {
     if (scanType === "selected") {
       const selectedFiles = getSelectedFiles();
-      console.log(selectedFiles);
       return (
         <List
           items={selectedFiles.map(({ path, name, size }) => ({
@@ -180,7 +179,7 @@ export default function RunInspectButton({
   return (
     <>
       <Button
-        className="h-[6.75rem] w-full"
+        className="h-[6.75rem] w-full text-[1.4rem]"
         onClick={openModal}
         disabled={isInspectionRunning}
       >

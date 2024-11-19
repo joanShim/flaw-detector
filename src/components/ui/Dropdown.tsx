@@ -2,7 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { forwardRef, useRef, useState } from "react";
-import { IconCaretDown, IconCheck } from "./Icons";
+import IconCheck from "./icons/IconCheck";
+import IconCaretDown from "./icons/IconCaretDown";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 export type DropdownProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -23,6 +24,7 @@ export type Option = { id: string; name: string; value: string };
 const typeOptions: Option[] = [
   { id: "0", name: "검사완료", value: "done" },
   { id: "1", name: "검사중", value: "onProgress" },
+  { id: "2", name: "미검사", value: "notChecked" },
 ];
 
 const labelOptions: Option[] = [
@@ -56,8 +58,9 @@ const DropdownMenu = forwardRef<HTMLUListElement, DropdownMenuProps>(
       const newIndex = index === selectedIndex ? -1 : index;
       setSelectedIndex(newIndex);
       setIsOpen(false); // close dropdown
-      onChange(newIndex === -1 ? "-1" : options[index].value);
+      onChange(newIndex === -1 ? "" : options[index].value);
     };
+
     return (
       <ul
         className={cn(
@@ -73,7 +76,7 @@ const DropdownMenu = forwardRef<HTMLUListElement, DropdownMenuProps>(
             className={cn(
               "flex-center-center h-[2.438rem] w-full bg-white px-[0.6rem] py-[0.469rem] transition-all duration-300 first:rounded-t-lg last:rounded-b-lg",
               selectedIndex === index
-                ? "cursor-default justify-between bg-purple-dark"
+                ? "cursor-default gap-x-2 bg-primary-50"
                 : "hover:bg-purple-light",
               name.length > 3 && "px-[0.1rem]",
             )}
@@ -82,7 +85,7 @@ const DropdownMenu = forwardRef<HTMLUListElement, DropdownMenuProps>(
             role="menu-item"
             aria-label="menu item"
           >
-            {selectedIndex === index && <IconCheck width={20} height={20} />}
+            {selectedIndex === index && <IconCheck width={13} height={13} />}
             {name}
           </li>
         ))}
@@ -102,26 +105,32 @@ export default function Dropdown({
   const menuRef = useRef<HTMLUListElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const selectedOptionName = getOptions(type).find(
+    (option) => option.id === selectedIndex.toString(),
+  )?.name;
 
   useOutsideClick([menuRef, buttonRef], () => setIsOpen(false));
 
   return (
     <div
       className={cn(
-        "relative flex w-[5.563rem] cursor-pointer flex-col",
+        "relative flex w-[6rem] min-w-fit cursor-pointer flex-col",
         className,
       )}
       {...props}
     >
       <button
         className={cn(
-          "inline-flex h-[2.75rem] w-full items-center justify-between rounded-lg border border-gray-default px-[0.625rem] py-[0.625rem] text-xl text-gray-dark outline-0",
+          "flex-center-center h-[2.75rem] w-full rounded-lg border border-gray-default px-[0.625rem] py-[0.625rem] text-xl text-gray-dark outline-0 hover:bg-slate-50",
+          !selectedOptionName
+            ? "gap-x-2"
+            : "bg-purple-light font-bold shadow-[0_0.833rem_1.667rem_0_rgba(150,150,150,0.15)]",
         )}
         onClick={() => setIsOpen(!isOpen)}
         ref={buttonRef}
       >
-        <span>{type === "sort" ? "Sort" : "Type"}</span>
-        <IconCaretDown />
+        <span>{selectedOptionName || (type === "sort" ? "Sort" : "Type")}</span>
+        {!selectedOptionName && <IconCaretDown width={12} height={6} />}
       </button>
       {isOpen && (
         <DropdownMenu

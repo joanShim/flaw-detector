@@ -14,7 +14,11 @@ type CodeContainerProps = {
   repo: string;
 };
 
-export default function CodeContainer({ username, repo }: CodeContainerProps) {
+export default function CodeContainer({
+  username,
+  repo,
+  className,
+}: CodeContainerProps & { className?: string }) {
   // 현재 파일의 검사 여부
   const currentFile = useFileViewerStore((state) => state.currentFile);
   const fileStatuses = useFileProcessStore((state) => state.fileStatuses);
@@ -50,7 +54,10 @@ export default function CodeContainer({ username, repo }: CodeContainerProps) {
 
   return (
     <section
-      className={cn("relative w-full overflow-y-auto overflow-x-hidden")}
+      className={cn(
+        "relative w-full overflow-y-auto overflow-x-hidden",
+        className,
+      )}
     >
       {/* 코드 뷰어 */}
       <CodeViewer

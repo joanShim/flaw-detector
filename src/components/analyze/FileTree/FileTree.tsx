@@ -18,7 +18,7 @@ type BookmarkedFile = {
   isBookmarked: true;
 };
 
-function FileTree({ data, repo, sortOption }: FileTreeProps) {
+export default function FileTree({ data, repo, sortOption }: FileTreeProps) {
   const rootItems = data.tree.filter((item) => !item.path.includes("/"));
 
   const fileBookmarks = useFileBookmarkStore((state) =>
@@ -56,7 +56,7 @@ function FileTree({ data, repo, sortOption }: FileTreeProps) {
   }, [rootItems, sortOption]);
 
   return (
-    <ul className="">
+    <ul className="max-h-[40rem] overflow-x-hidden overflow-y-scroll scrollbar-hide">
       {sortOption === "bookmark" && (
         <>
           <li className="flex justify-between border-b border-line-default px-4 py-2 text-sm text-gray-500">
@@ -97,5 +97,3 @@ function FileTree({ data, repo, sortOption }: FileTreeProps) {
     </ul>
   );
 }
-
-export default React.memo(FileTree);
